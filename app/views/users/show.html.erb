@@ -82,11 +82,11 @@
                   label: '投稿した本の数',
                   data: [
                     <%= @books.created_6days.count %>,
-                    <%= @books.created_5days.count %>, 
-                    <%= @books.created_4days.count %>, 
-                    <%= @books.created_3days.count %>, 
-                    <%= @books.created_2days.count %>, 
-                    <%= @books.created_yesterday.count %>, 
+                    <%= @books.created_5days.count %>,
+                    <%= @books.created_4days.count %>,
+                    <%= @books.created_3days.count %>,
+                    <%= @books.created_2days.count %>,
+                    <%= @books.created_yesterday.count %>,
                     <%= @books.created_today.count %>
                   ],
                   borderColor: "rgba(0,0,255,1)",
@@ -114,6 +114,15 @@
           });
         });
       </script>
+      <%= form_with url: user_search_path(@user), method: :get, local: false  do |f| %>
+        <%= f.date_field :created_at %>
+        <%= f.submit '検索', class: 'btn btn-primary'  %>
+      <% end %>
+      <div id="search_result">
+        <% if @search_book.present? %>
+          <%= render 'search', search_book: @search_book %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
